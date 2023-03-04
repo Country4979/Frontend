@@ -16,3 +16,13 @@ export function buildTweetView(tweet) {
 
     return newTweetElement;
 }
+
+export function buildSpinnerView() {    //Pinta el spinners.
+    return `
+    <div class="spinner">
+        <div></div>
+        <div></div>
+        <div></div>
+    </div>
+    `
+}
