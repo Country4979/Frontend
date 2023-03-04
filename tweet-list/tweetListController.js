@@ -1,21 +1,29 @@
 import { getTweets } from './tweets.js' // De aquí vienen los datos
-import { buildTweetView, buildSpinnerView } from './tweetView.js'
+import { buildTweetView, buildSpinnerView, buildErrorLoadingTweets } from './tweetView.js'
 
 //Obtener el array de tweets
 export async function tweetListController(tweetListElement) {
     //Mostrar ruleta, que es una funcionalidad añadida mientras espera los datos. Lo ideal es que lo haga otro controlador.    
     tweetListElement.innerHTML = buildSpinnerView(); //Cargamos la ruleta de carga nada más hacer la petición
+    let tweets = [];
 
-    const tweets = await getTweets() //Porque esta función devuelve una promesa
+     try {
+        tweets = await getTweets() //Es un await porque esta función devuelve una promesa => Hay que gestionar errores.
+        //Ocultar la ruleta para que los tweets no nos pisen la ruleta
+        hideSpinner(tweetListElement) //Lo ponemos aquí para que se oculte antes de lanzar el error y que se aplique el innerHTML de la función del error.
+
+        //Generar el HTML que representará un tweet
+        for (const tweet of tweets) {       //Por cada tweet de mi variable tweet
+            const newTweetElement = buildTweetView(tweet);
+            tweetListElement.appendChild(newTweetElement); //Añade al DOM, concretamente a section class tweet-list
+        }
     
-    //Ocultar la ruleta para que los tweets no nos pisen la ruleta
-    hideSpinner(tweetListElement)
-    
-    //Generar el HTML que representará un tweet
-    for (const tweet of tweets) {       //Por cada tweet de mi variable tweet
-        const newTweetElement = buildTweetView(tweet);
-        tweetListElement.appendChild(newTweetElement); //Añade al DOM, concretamente a section class tweet-list
+    } catch (error) {
+        //Gestión del error
+        tweetListElement.innerHTML = buildErrorLoadingTweets()
     }
+    
+    
     
 }
 

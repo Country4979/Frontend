@@ -26,3 +26,7 @@ export function buildSpinnerView() {    //Pinta el spinners.
     </div>
     `
 }
+
+export function buildErrorLoadingTweets() {
+    return `<p class="load-error">Se ha producido un error en la carga de datos. Inténtalo de nuevo más tarde</p>`
+}
