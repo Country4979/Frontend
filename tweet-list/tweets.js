@@ -19,12 +19,13 @@
 /*/
 
 export async function getTweets() {
-  const tweetsUrlOKOK = 'https://gist.githubusercontent.com/edu-aguilar/8c9a509ec582d04da0640be2b0ede8d5/raw/f75c68645821f3c33d82d9c2c048215584d1d332/tweets.json';  
+  //const tweetsUrlOKOK = 'https://gist.githubusercontent.com/edu-aguilar/8c9a509ec582d04da0640be2b0ede8d5/raw/f75c68645821f3c33d82d9c2c048215584d1d332/tweets.json';  
   //const tweetsUrlKO = 'https://gist.githubus/edu-aguilar/8c9a509ec582d04da0640be2b0ede8d5/raw/f75c68645821f3c33d82d9c2c048215584d1d332/tweets.json';  <-- url rota para probar la gestión del errror
-  //const tweetsUrlOK = 'http://localhost:8000/api/tweets';
+  const tweetsUrlOK = 'http://localhost:8000/api/tweets';
   
-  const response = await fetch(tweetsUrl); //Con este await gestionamos la promesa que devuelve el fetch
-  // const response = await fetch(tweetsUrlOK);
+  const response = await fetch(tweetsUrlOK); //Con este await gestionamos la promesa que devuelve el fetch
+  // const response = await fetch(tweetsUrlOK)
+  ;
   const tweets = await response.json(); //Con este await gestionamos la promesa que devuelve el response.jason+()
   
     return tweets
